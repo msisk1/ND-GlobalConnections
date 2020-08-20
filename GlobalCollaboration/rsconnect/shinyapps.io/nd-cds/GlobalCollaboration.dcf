@@ -1,0 +1,13 @@
+name: GlobalCollaboration
+title: GlobalCollaboration
+username:
+account: nd-cds
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2261265
+bundleId: 3253616
+url: https://nd-cds.shinyapps.io/GlobalCollaboration/
+when: 1591819921.38831
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: FullList.rData
