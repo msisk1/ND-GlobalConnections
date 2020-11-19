@@ -58,6 +58,12 @@ server <- function(input, output) {
         lab.val <- active.layer()[active.layer()$admin == "United States of America",input$usedVar]%>%
             st_set_geometry(NULL)%>%
             pull(input$usedVar)
+        lab.val.invert <- active.layer()[active.layer()$admin != "United States of America",input$usedVar]%>%
+            st_set_geometry(NULL)%>%
+            sum(na.rm = T)
+        leg.title <- paste0("# of global co-authors <br> Total = ",lab.val.invert,"")
+        print(lab.val.invert)    
+        
         pal.all <- colorNumeric(
             palette = "viridis",
             domain = c(1:max(active.layer()$active, na.rm = T)),
@@ -71,7 +77,7 @@ server <- function(input, output) {
                                 labelOptions = labelOptions(noHide = T, textOnly = TRUE,  direction = 'center'))%>%
             addPolygons(data = active.layer(), label = ~popup, weight = .5, color = "white", smoothFactor = 0.2, fillOpacity = 1,            # addPolygons(data = active.layer(), label = ~popup, stroke = FALSE, smoothFactor = 0.2, fillOpacity = 1,
                         fillColor = ~pal.all(active.layer()$active))%>%
-            addLegend(pal = pal.all, values = c(1:max(active.layer()$active, na.rm = T)), na.label = F, position = "bottomright",title = "# of global co-authors",
+            addLegend(pal = pal.all, values = c(1:max(active.layer()$active, na.rm = T)), na.label = F, position = "bottomright",title = leg.title,
             )
         
     })
